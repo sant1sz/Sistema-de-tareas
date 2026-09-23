@@ -60,6 +60,7 @@ public class Tarea {
         return  "titulo: " + titulo + "\n" +
                 "Descripcion: " + descripcion + "\n" +
                 "Fecha_entrega: " + fecha_entrega +"\n"+
-                "Prioridad: " + prioridad.getNombre();
+                "Prioridad: " + prioridad.getNombre() +"\n" +
+                "Estado: " + estado;
     }
 }

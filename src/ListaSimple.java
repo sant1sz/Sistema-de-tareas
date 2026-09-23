@@ -90,4 +90,43 @@ public class ListaSimple <T>{
             return temp.getData();
         }
     }
+    public void addOrdered(Tarea nuevaTarea){
+        Nodo<T> nuevoNodo = new Nodo<>((T) nuevaTarea);
+        if (isEmpty()){
+            this.head = (Nodo<T>)nuevoNodo;
+            this.tail = (Nodo<T>)nuevoNodo;
+            this.size++;
+            return;
+        }
+        Nodo<Tarea> actual = (Nodo<Tarea>)this.head;
+        Nodo<Tarea> anterior = null;
+
+        while (actual !=null){
+            Tarea tareaActual =actual.getData();
+
+            boolean vaAntes = nuevaTarea.getFecha_entrega().isBefore(tareaActual.getFecha_entrega());
+            boolean mismaFecha = nuevaTarea.getFecha_entrega().isEqual(tareaActual.getFecha_entrega());
+
+            if(mismaFecha){
+                vaAntes=nuevaTarea.getPrioridad().getValor() >= tareaActual.getPrioridad().getValor();
+            }
+            if(vaAntes){
+                break;
+            }
+            anterior = actual;
+            actual = actual.getNext();
+        }
+        if(anterior == null){
+            nuevoNodo.setNext(this.head);
+            this.head = (Nodo<T>)nuevoNodo;
+
+        }else{
+            nuevoNodo.setNext(anterior.getNext());
+            anterior.setNext((Nodo) nuevoNodo);
+            if (actual == null) {
+                this.tail = (Nodo<T>) nuevoNodo;
+            }
+        }
+        this.size++;
+    }
 }

@@ -1,13 +1,14 @@
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Tarea {
     private String titulo;
     private String descripcion;
-    private Date fecha_entrega;
+    private LocalDate fecha_entrega;
     private Prioridad prioridad;
     private String estado;
 
-    public Tarea(String titulo, String descripcion, Date fecha_entrega, Prioridad prioridad, String estado) {
+    public Tarea(String titulo, String descripcion, LocalDate fecha_entrega, Prioridad prioridad, String estado) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fecha_entrega = fecha_entrega;
@@ -31,11 +32,11 @@ public class Tarea {
         this.descripcion = descripcion;
     }
 
-    public Date getFecha_entrega() {
+    public LocalDate getFecha_entrega() {
         return fecha_entrega;
     }
 
-    public void setFecha_entrega(Date fecha_entrega) {
+    public void setFecha_entrega(LocalDate fecha_entrega) {
         this.fecha_entrega = fecha_entrega;
     }
 

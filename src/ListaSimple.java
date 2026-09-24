@@ -1,51 +1,51 @@
-public class ListaSimple <T>{
+public class ListaSimple <T> {
 
     private Nodo head;
     private Nodo tail;
     private int size;
 
-    public ListaSimple(){
+    public ListaSimple() {
         this.head = null;
         this.tail = null;
         this.size = 0;
     }
 
     //metodos de la lista
-    public int getSize(){
+    public int getSize() {
         return this.size;
     }
 
-    public void setSize(int size){
+    public void setSize(int size) {
         this.size = size;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return this.size == 0;
     }
 
-    public Nodo First(){
+    public Nodo First() {
         return this.head;
     }
 
-    public Nodo Last(){
+    public Nodo Last() {
         return this.tail;
     }
 
-    public void addFirst(T data){
+    public void addFirst(T data) {
         Nodo<T> n = new Nodo<>(data);
-        if (this.isEmpty()){
+        if (this.isEmpty()) {
             this.head = n;
             this.tail = n;
-        } else{
+        } else {
             n.setNext(this.head);
             this.head = n;
         }
         this.size += 1;
     }
 
-    public void addLast(T data){
+    public void addLast(T data) {
         Nodo<T> n = new Nodo<>(data);
-        if (this.isEmpty()){
+        if (this.isEmpty()) {
             this.head = n;
             this.tail = n;
         } else {
@@ -55,10 +55,10 @@ public class ListaSimple <T>{
         this.size += 1;
     }
 
-    public T removeFirst(){
-        if (this.isEmpty()){
+    public T removeFirst() {
+        if (this.isEmpty()) {
             return null;
-        } else{
+        } else {
             Nodo<T> temp = this.head;
             this.head = this.head.getNext();
             temp.setNext(null);
@@ -68,18 +68,18 @@ public class ListaSimple <T>{
         }
     }
 
-    public T removeLast(){
-        if (this.size < 1){
+    public T removeLast() {
+        if (this.size < 1) {
             return null;
 
-        } else if (this.size == 1){
+        } else if (this.size == 1) {
             return this.removeFirst();
 
         } else {
             Nodo<T> temp = this.tail;
             Nodo<T> anterior = this.head;
 
-            while (anterior.getNext() != this.tail){
+            while (anterior.getNext() != this.tail) {
                 anterior = anterior.getNext();
             }
 
@@ -89,44 +89,5 @@ public class ListaSimple <T>{
 
             return temp.getData();
         }
-    }
-    public void addOrdered(Tarea nuevaTarea){
-        Nodo<T> nuevoNodo = new Nodo<>((T) nuevaTarea);
-        if (isEmpty()){
-            this.head = (Nodo<T>)nuevoNodo;
-            this.tail = (Nodo<T>)nuevoNodo;
-            this.size++;
-            return;
-        }
-        Nodo<Tarea> actual = (Nodo<Tarea>)this.head;
-        Nodo<Tarea> anterior = null;
-
-        while (actual !=null){
-            Tarea tareaActual =actual.getData();
-
-            boolean vaAntes = nuevaTarea.getFecha_entrega().isBefore(tareaActual.getFecha_entrega());
-            boolean mismaFecha = nuevaTarea.getFecha_entrega().isEqual(tareaActual.getFecha_entrega());
-
-            if(mismaFecha){
-                vaAntes=nuevaTarea.getPrioridad().getValor() >= tareaActual.getPrioridad().getValor();
-            }
-            if(vaAntes){
-                break;
-            }
-            anterior = actual;
-            actual = actual.getNext();
-        }
-        if(anterior == null){
-            nuevoNodo.setNext(this.head);
-            this.head = (Nodo<T>)nuevoNodo;
-
-        }else{
-            nuevoNodo.setNext(anterior.getNext());
-            anterior.setNext((Nodo) nuevoNodo);
-            if (actual == null) {
-                this.tail = (Nodo<T>) nuevoNodo;
-            }
-        }
-        this.size++;
     }
 }

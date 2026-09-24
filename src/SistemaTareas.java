@@ -7,8 +7,48 @@ public class SistemaTareas {
 
     }
 
-    public void agregar_tarea(Tarea tarea){
-        tareas.addOrdered(tarea);
+    public void agregar_tarea(Tarea nuevaTarea) {
+
+        if (this.tareas.isEmpty()) {
+            this.tareas.addFirst(nuevaTarea);
+            return;
+        }
+
+        Nodo<Tarea> temp = this.tareas.First();
+        Nodo<Tarea> anterior = null;
+
+
+        while (temp != null) {
+            boolean fechaAnterior = temp.getData().getFecha_entrega().isBefore(nuevaTarea.getFecha_entrega());
+            boolean mismaFecha = temp.getData().getFecha_entrega().isEqual(nuevaTarea.getFecha_entrega());
+            boolean mayorOIgualPrioridad = temp.getData().getPrioridad().getValor() >= nuevaTarea.getPrioridad().getValor();
+
+
+            if (fechaAnterior || (mismaFecha && mayorOIgualPrioridad)) {
+                anterior = temp;
+                temp = temp.getNext();
+            } else {
+
+                break;
+            }
+        }
+
+
+        if (anterior == null) {
+
+            this.tareas.addFirst(nuevaTarea);
+        } else if (temp == null) {
+
+            this.tareas.addLast(nuevaTarea);
+        } else {
+
+            Nodo<Tarea> nuevoNodo = new Nodo<>(nuevaTarea);
+            anterior.setNext(nuevoNodo);
+            nuevoNodo.setNext(temp);
+
+
+            this.tareas.setSize(this.tareas.getSize() + 1);
+        }
     }
 
     public Tarea buscar_tarea(String titulo){

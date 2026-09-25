@@ -20,7 +20,7 @@ public class Main {
         sistema.agregar_tarea(t2);
         sistema.agregar_tarea(t3);
 
-        System.out.println("\n--- LISTA MOSTRAR ---");
+        System.out.println("\n--- MOSTRAR LISTA ---");
         sistema.mostrar_tareas();
 
         System.out.println("\n--- BUSCAR TAREA ---");
@@ -29,8 +29,8 @@ public class Main {
         System.out.println("\n--- MARCAR COMPLETA ---");
         sistema.marcar_completa("Tarea 2");
 
-
-
+        System.out.println("\n--- MOSTRAR LISTA");  //Se muetra la lista nuevamente para verificar que se haya eliminado la tarea que se completó
+        sistema.mostrar_tareas();
 
     }
 }

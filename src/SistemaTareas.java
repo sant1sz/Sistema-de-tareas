@@ -52,7 +52,7 @@ public class SistemaTareas {
     }
 
     public Tarea buscar_tarea(String titulo){
-        Nodo<Tarea> actual = (Nodo<Tarea>)tareas.First();
+        Nodo<Tarea> actual = this.tareas.First();
         while (actual != null){
             if(actual.getData().getTitulo().equalsIgnoreCase(titulo)){
                 Tarea t =actual.getData();
@@ -69,7 +69,7 @@ public class SistemaTareas {
         return null;
     }
     public Tarea eliminar_tarea(String titulo){
-        Nodo<Tarea> actual =(Nodo <Tarea>) tareas.First();
+        Nodo<Tarea> actual = this.tareas.First();
         Nodo<Tarea> anterior =null;
 
         while (actual != null){
@@ -95,7 +95,7 @@ public class SistemaTareas {
     }
 
     public void mostrar_tareas(){
-        Nodo<Tarea> actual = (Nodo<Tarea>)tareas.First();
+        Nodo<Tarea> actual = this.tareas.First();
         while (actual !=null){
             Tarea t = actual.getData();
             System.out.println("------------------------------------");
